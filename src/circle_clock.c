@@ -11,6 +11,10 @@ PBL_APP_INFO(MY_UUID,
              DEFAULT_MENU_ICON,
              APP_INFO_WATCH_FACE);
 
+#define HOUR_CIRCLE_RADIUS 9
+#define MINUTE_CIRCLE_RADIUS 6
+#define CIRCLE_LINE_THICKNESS 2
+
 int minute_centers[][2] = {
   {72, 10}, {103, 18}, {126, 41}, {134, 72}, {126, 103}, {103, 126}, {72, 134},
   {41, 126}, {18, 103}, {10, 72}, {18, 41}, {41, 18} };
@@ -25,9 +29,6 @@ Window window;
 Layer display_layer;
 
 int tick;
-
-#define CIRCLE_RADIUS 12
-#define CIRCLE_LINE_THICKNESS 2
 
 void draw_cell(GContext* ctx, GPoint center, bool filled, int circle_radius) {
   // Each "cell" represents a binary digit or 0 or 1.
@@ -47,11 +48,11 @@ void draw_cell(GContext* ctx, GPoint center, bool filled, int circle_radius) {
 }
 
 void draw_minute_cell(GContext* ctx, GPoint center, bool filled) {
-  draw_cell(ctx, center, filled, 6);
+  draw_cell(ctx, center, filled, MINUTE_CIRCLE_RADIUS);
 }
 
 void draw_hour_cell(GContext* ctx, GPoint center, bool filled) {
-  draw_cell(ctx, center, filled, 10);
+  draw_cell(ctx, center, filled, HOUR_CIRCLE_RADIUS);
 }
 
 unsigned short get_display_hour(unsigned short hour) {

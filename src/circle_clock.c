@@ -15,6 +15,9 @@ PBL_APP_INFO(MY_UUID,
 #define MINUTE_CIRCLE_RADIUS 6
 #define CIRCLE_LINE_THICKNESS 2
 
+#define DATE_WIDTH 30
+#define DATE_HEIGHT 28
+
 int minute_centers[][2] = {
   {72, 10}, {103, 18}, {126, 41}, {134, 72}, {126, 103}, {103, 126}, {72, 134},
   {41, 126}, {18, 103}, {10, 72}, {18, 41}, {41, 18} };
@@ -27,6 +30,7 @@ int hour_centers[][2] = {
 Window window;
 
 Layer display_layer;
+TextLayer date_layer;
 
 int tick;
 
@@ -69,6 +73,7 @@ unsigned short get_display_minute(unsigned short minute) {
 }
 
 void display_layer_update_callback(Layer *me, GContext* ctx) {
+  static char date_text[] = "MMM-DD"; // Needs to be static because it's used by the system later.
 
   PblTm t;
 
@@ -103,6 +108,10 @@ void display_layer_update_callback(Layer *me, GContext* ctx) {
     }
   }
 
+  graphics_draw_line(ctx, GPoint(0,168 - DATE_HEIGHT + 2), GPoint(144, 168 - DATE_HEIGHT + 2));
+  graphics_draw_line(ctx, GPoint(0,168 - DATE_HEIGHT + 3), GPoint(144, 168 - DATE_HEIGHT + 3));
+  string_format_time(date_text, sizeof(date_text), "%b-%d", &t);
+  text_layer_set_text(&date_layer, date_text);
 
 }
 
@@ -122,6 +131,13 @@ void handle_init(AppContextRef ctx) {
   layer_init(&display_layer, window.layer.frame);
   display_layer.update_proc = &display_layer_update_callback;
   layer_add_child(&window.layer, &display_layer);
+
+  text_layer_init(&date_layer, 
+    GRect(72-DATE_WIDTH, 168-DATE_HEIGHT-2, 72+DATE_WIDTH, 168-2));
+  text_layer_set_text_color(&date_layer, GColorWhite);
+  text_layer_set_background_color(&date_layer, GColorClear);
+  text_layer_set_font(&date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
+  layer_add_child(&window.layer, &date_layer.layer);
 
   tick = 0;
  }

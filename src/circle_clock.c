@@ -103,14 +103,6 @@ void display_layer_update_callback(Layer *me, GContext* ctx) {
     }
   }
 
-  // draw_cell_row_for_digit(ctx, display_hour / 10, HOURS_FIRST_DIGIT_MAX_COLS, HOURS_FIRST_DIGIT_ROW);
-  // draw_cell_row_for_digit(ctx, display_hour % 10, DEFAULT_MAX_COLS, HOURS_SECOND_DIGIT_ROW);
-
-  // draw_cell_row_for_digit(ctx, t.tm_min / 10, MINUTES_FIRST_DIGIT_MAX_COLS, MINUTES_FIRST_DIGIT_ROW);
-  // draw_cell_row_for_digit(ctx, t.tm_min % 10, DEFAULT_MAX_COLS, MINUTES_SECOND_DIGIT_ROW);
-
-  // draw_cell_row_for_digit(ctx, t.tm_sec / 10, SECONDS_FIRST_DIGIT_MAX_COLS, SECONDS_FIRST_DIGIT_ROW);
-  // draw_cell_row_for_digit(ctx, t.tm_sec % 10, DEFAULT_MAX_COLS, SECONDS_SECOND_DIGIT_ROW);
 
 }
 

@@ -10,3 +10,6 @@ Discussed design ideas with my wife and daughter over breakfast and decided to t
 Here is an example from 10:52am.
 
 ![example 10:52](https://raw.github.com/stevenchanin/Pebble_Circle_Watch/master/misc/example_10_52am.jpg)
+
+## Credit
+Based on the example 'Just A Bit' from the Pebble SDK
